@@ -1,3 +1,3 @@
 <?php
- echo "algo nuevo ejejeje";
+ echo "algo nuevo v2 con hook";
 ?>
