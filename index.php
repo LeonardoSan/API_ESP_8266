@@ -124,7 +124,9 @@ if(isset($_GET['url'])){
 		http_response_code(405);
 	}
 }
-else{*/?>
+else{*/
+	print_r('algo');
+?>
 	<head>
 	</head>
 	<body>
