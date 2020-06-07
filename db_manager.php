@@ -1,16 +1,16 @@
 <?php
 
-$server = "127.0.0.1";
-$user = "root";
-$pswd = "";
-$database = "db_domosoft";
-$port = "3306";
-
-// $server = "localhost";
-// $user = "id13620623_admin";
-// $pswd = "/cNh#z_yj4w=unza";
-// $database = "id13620623_domosoft";
+// $server = "127.0.0.1";
+// $user = "root";
+// $pswd = "";
+// $database = "db_domosoft";
 // $port = "3306";
+
+$server = "localhost";
+$user = "u522727590_domosoft";
+$pswd = "/cNh#z_yj4w=unza";
+$database = "u522727590_domosoft";
+$port = "3306";
 
 
 //String de conexión

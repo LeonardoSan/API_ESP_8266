@@ -1,6 +1,6 @@
 <?php
 
-/*require_once('api_controller.php');
+require_once('api_controller.php');
 require_once('functions.php');
 
 if(isset($_GET['url'])){
@@ -124,9 +124,7 @@ if(isset($_GET['url'])){
 		http_response_code(405);
 	}
 }
-else{*/
-	print_r('algo');
-?>
+else{?>
 	<head>
 	</head>
 	<body>
@@ -172,6 +170,6 @@ else{*/
 		</div>
 	</body>
 
-<!-- <?php
+<?php
 }
-?> -->
+?>
