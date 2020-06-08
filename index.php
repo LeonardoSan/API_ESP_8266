@@ -129,7 +129,7 @@ else{?>
 	</head>
 	<body>
 		<div class="container">
-			<h1>API DomoSoft</h1>
+			<h1>API DomoSoft IoT</h1>
 			<div class="divbody">
 				<p>Sensor de Temperatura</p>
 				<code>
