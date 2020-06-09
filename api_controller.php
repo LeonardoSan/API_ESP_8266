@@ -45,7 +45,7 @@ function GetTemperatureByDate($initialDate, $finalDate){
 			$newkey = $valor["key"];
 		}
 		$prom = $sum / $long;
-		array_push($hoursArrayProm, array("name" => $newkey, "value" => $prom));
+		array_push($hoursArrayProm, array("name" => $newkey, "value" => round($prom, 1)));
 	}
 
 	return ConvertirUTF8($hoursArrayProm);
