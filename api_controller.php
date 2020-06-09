@@ -112,7 +112,37 @@ function GetAllHumidity(){
 function GetHumidityByDate($initialDate, $finalDate){
 	$query = "SELECT * FROM humedad WHERE Fecha >= '$initialDate 00:00:00' AND Fecha <= '$finalDate 23:59:59' ORDER BY Fecha ASC";
 	$respuesta = Select($query);
-	return ConvertirUTF8($respuesta);
+	$hoursArray = array();
+	foreach ($respuesta as $row) {
+		$fecha = strtotime($row["Fecha"]);
+		$anio = date("Y", $fecha);
+		$mes = date("m", $fecha);
+		$dia = date("d", $fecha);
+		$hora = date("H", $fecha);
+		
+		if(!array_key_exists($anio.$mes.$dia.$hora, $hoursArray)){
+			$hoursArray[$anio.$mes.$dia.$hora] = array();
+		}
+		array_push($hoursArray[$anio.$mes.$dia.$hora], array("date"=> $row["Fecha"], "value" => $row["Valor"], "key" => $anio."-".$mes."-".$dia." ".$hora));
+	}
+
+	$hoursArrayProm = array();
+	$sum = 0;
+	$prom = 0;
+	$long = 0;
+	foreach ($hoursArray as $key => $value) {
+		$sum = 0;
+		$long = count($hoursArray[$key]);
+		$newkey = "";
+		foreach ($hoursArray[$key] as $valor) {
+			$sum += $valor["value"];
+			$newkey = $valor["key"];
+		}
+		$prom = $sum / $long;
+		array_push($hoursArrayProm, array("name" => $newkey, "value" => round($prom)));
+	}
+
+	return ConvertirUTF8($hoursArrayProm);
 }
 
 function GetHumidityById($id){
