@@ -11,9 +11,10 @@ if(isset($_GET['url'])){
 	//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 	// headers to tell that result is JSON
 	header('Content-type: application/json; charset=utf-8');
-	header('Access-Control-Allow-Origin: *');
-	header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	// header('Access-Control-Allow-Origin: *');
+	// header("Access-Control-Allow-Headers: *");
+	// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+	// header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
 	if($_SERVER['REQUEST_METHOD'] == 'GET'){
 		//echo "GET";
