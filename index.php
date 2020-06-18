@@ -16,10 +16,10 @@ if(isset($_GET['url'])){
 	// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 	// header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
+	$id = intval(preg_replace('/[^0-9]+/','', $var),10);
+
 	if($_SERVER['REQUEST_METHOD'] == 'GET'){
 		//echo "GET";
-
-		$id = intval(preg_replace('/[^0-9]+/','', $var),10);
 		//print_r($id);
 
 		$filtroFecha = false;
@@ -116,6 +116,17 @@ if(isset($_GET['url'])){
 					}
 					http_response_code(200);
 					break;
+				case "led/$id";
+					$estado = SetLedById($conver, $id);
+					if($estado == true){
+						print_r("{'OK': 'OK'}");
+					}
+					else{
+						print_r("{'OK': 'Not OK'}");
+					}
+					http_response_code(200);
+					break;
+					break;
 				default;
 			}
 
@@ -162,6 +173,8 @@ else{?>
 				<p>LED</p>
 				<code>
 					POST /led
+					<br>
+					POST /led/$id
 				</code>
 				<code>
 					<br>

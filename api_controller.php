@@ -243,4 +243,48 @@ function SetLed($array){
 		return false;
 	}
 }
+
+function SetLedById($array, $id){
+	if(isset($array['Valor']) && isset($array['Lugar']) && isset($array['Id_Dispositivo']) && isset($array['Id_Dispositivo']) && isset($array['Red']) && isset($array['Ip']) && isset($array['Key'])){
+		$Valor = $array['Valor'];
+		$Lugar = $array['Lugar'];
+		$Id_Dispositivo = $array['Id_Dispositivo'];
+		$Red = $array['Red'];
+		$Ip = $array['Ip'];
+		$Key = $array['Key'];
+
+		if($Key != "" && $Valor != "" && $Lugar != "" && $Id_Dispositivo != "" && $Red != "" && $Ip != ""){
+
+			$token = ValidateToken($Id_Dispositivo);
+
+					if(count($token) > 0){
+						$valorToken = $token[0]["token"];
+
+						if($Key == $valorToken){
+							if($Valor == "true" || $Valor == "false" || $Valor == "1" || $Valor == "0"){
+								$query = "UPDATE led SET Valor = $Valor, Lugar = '$Lugar', Id_Dispositivo = '$Id_Dispositivo', Red = '$Red', Ip = '$Ip', Fecha = (SELECT CONVERT_TZ(NOW(),@@session.time_zone,'-5:00')) WHERE Id = $id";
+								// return $query;
+								Insert($query);
+								return true;
+							}
+							else{
+								return false;
+							}
+						}
+						else{
+							return false;
+						}
+					}
+					else{
+						return false;
+					}
+		}
+		else{
+			return false;
+		}
+	}
+	else{
+		return false;
+	}
+}
 ?>
