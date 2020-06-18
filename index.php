@@ -89,40 +89,48 @@ if(isset($_GET['url'])){
 				case "temperature";
 					$estado = SetTemperature($conver);
 					if($estado == true){
-						print_r("{'OK': 'OK'}");
+						$resp = array("OK" => "OK");
+						print_r(json_encode($resp));
 					}
 					else{
-						print_r("{'OK': 'Not OK'}");
+						$resp = array("OK" => "Not OK");
+						print_r(json_encode($resp));
 					}
 					http_response_code(200);
 					break;
 				case "humidity";
 					$estado = SetHumidity($conver);
 					if($estado == true){
-						print_r("{'OK': 'OK'}");
+						$resp = array("OK" => "OK");
+						print_r(json_encode($resp));
 					}
 					else{
-						print_r("{'OK': 'Not OK'}");
+						$resp = array("OK" => "Not OK");
+						print_r(json_encode($resp));
 					}
 					http_response_code(200);
 					break;
 				case "led";
 					$estado = SetLed($conver);
 					if($estado == true){
-						print_r("{'OK': 'OK'}");
+						$resp = array("OK" => "OK");
+						print_r(json_encode($resp));
 					}
 					else{
-						print_r("{'OK': 'Not OK'}");
+						$resp = array("OK" => "Not OK");
+						print_r(json_encode($resp));
 					}
 					http_response_code(200);
 					break;
 				case "led/$id";
 					$estado = SetLedById($conver, $id);
 					if($estado == true){
-						print_r("{'OK': 'OK'}");
+						$resp = array("OK" => "OK");
+						print_r(json_encode($resp));
 					}
 					else{
-						print_r("{'OK': 'Not OK'}");
+						$resp = array("OK" => "Not OK");
+						print_r(json_encode($resp));
 					}
 					http_response_code(200);
 					break;
