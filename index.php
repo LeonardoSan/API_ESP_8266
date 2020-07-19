@@ -45,13 +45,13 @@ if(isset($_GET['url'])){
 				}
 			break;
 			case "temperatura/$id";
-				$resp = GetDataById($resource, $id);
+				$resp = GetDataById("temperatura", $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
 			case "humedad";
-				if($filtroFecha){
-					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
+				if($filtroFecha && $idDispositivo != NULL){
+					$resp = GetDataByDate($resource, $idDispositivo, $fechaInicio, $fechaFinal);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
@@ -62,13 +62,13 @@ if(isset($_GET['url'])){
 				}
 			break;
 			case "humedad/$id";
-				$resp = GetDataById($resource, $id);
+				$resp = GetDataById("humedad", $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
 			case "calor";
-				if($filtroFecha){
-					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
+				if($filtroFecha && $idDispositivo != NULL){
+					$resp = GetDataByDate($resource, $idDispositivo, $fechaInicio, $fechaFinal);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
@@ -79,13 +79,13 @@ if(isset($_GET['url'])){
 				}
 			break;
 			case "calor/$id";
-				$resp = GetDataById($resource, $id);
+				$resp = GetDataById("calor", $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
 			case "humedad_terrestre";
-				if($filtroFecha){
-					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
+				if($filtroFecha && $idDispositivo != NULL){
+					$resp = GetDataByDate($resource, $idDispositivo, $fechaInicio, $fechaFinal);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
@@ -96,13 +96,13 @@ if(isset($_GET['url'])){
 				}
 			break;
 			case "humedad_terrestre/$id";
-				$resp = GetDataById($resource, $id);
+				$resp = GetDataById("humedad_terrestre", $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
 			case "fotoresistencia";
-				if($filtroFecha){
-					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
+				if($filtroFecha && $idDispositivo != NULL){
+					$resp = GetDataByDate($resource, $idDispositivo, $fechaInicio, $fechaFinal);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
@@ -113,7 +113,7 @@ if(isset($_GET['url'])){
 				}
 			break;
 			case "fotoresistencia/$id";
-				$resp = GetDataById($resource, $id);
+				$resp = GetDataById("fotoresistencia", $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
@@ -123,7 +123,7 @@ if(isset($_GET['url'])){
 				http_response_code(200);
 				break;
 			case "led/$id";
-				$resp = GetDataById($resource, $id);
+				$resp = GetDataById("led", $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
