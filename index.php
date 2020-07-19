@@ -4,8 +4,7 @@ require_once('api_controller.php');
 require_once('functions.php');
 
 if(isset($_GET['url'])){
-	$var = $_GET['url'];
-	//print_r($var);
+	$resource = $_GET['url'];
 
 	header('Cache-Control: no-cache, must-revalidate');
 	//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -16,7 +15,7 @@ if(isset($_GET['url'])){
 	// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 	// header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
-	$id = intval(preg_replace('/[^0-9]+/','', $var),10);
+	$id = intval(preg_replace('/[^0-9]+/','', $resource),10);
 
 	if($_SERVER['REQUEST_METHOD'] == 'GET'){
 		//echo "GET";
@@ -25,54 +24,106 @@ if(isset($_GET['url'])){
 		$filtroFecha = false;
 		$fechaInicio = empty ($_GET['fechaInicio']) ? NULL : $_GET['fechaInicio'];
 		$fechaFinal = empty ($_GET['fechaFinal']) ? NULL : $_GET['fechaFinal'];
+		$idDispositivo = empty($_GET['idDispositivo']) ? NULL: $_GET['idDispositivo'];
 		if($fechaInicio && $fechaFinal){
 			if(ValidarFecha($fechaInicio) && ValidarFecha($fechaFinal)){
 				$filtroFecha = true;
 			}
 		}
 
-		switch($var){
-			case "temperature";
-				if($filtroFecha){
-					$resp = GetTemperatureByDate($fechaInicio, $fechaFinal);
+		switch($resource){
+			case "temperatura";
+				if($filtroFecha && $idDispositivo != NULL){
+					$resp = GetDataByDate($resource, $idDispositivo, $fechaInicio, $fechaFinal);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
 				else{
-					$resp = GetAllTemperature();
+					$resp = GetAllData($resource);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
 			break;
-			case "temperature/$id";
-				$resp = GetTemperatureById($id);
+			case "temperatura/$id";
+				$resp = GetDataById($resource, $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
-			case "humidity";
+			case "humedad";
 				if($filtroFecha){
-					$resp = GetHumidityByDate($fechaInicio, $fechaFinal);
+					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
 				else{
-					$resp = GetAllHumidity();
+					$resp = GetAllData($resource);
 					print_r(json_encode($resp));
 					http_response_code(200);
 				}
 			break;
-			case "temperature/$id";
-				$resp = GetHumidityById($id);
+			case "humedad/$id";
+				$resp = GetDataById($resource, $id);
+				print_r(json_encode($resp));
+				http_response_code(200);
+				break;
+			case "calor";
+				if($filtroFecha){
+					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
+					print_r(json_encode($resp));
+					http_response_code(200);
+				}
+				else{
+					$resp = GetAllData($resource);
+					print_r(json_encode($resp));
+					http_response_code(200);
+				}
+			break;
+			case "calor/$id";
+				$resp = GetDataById($resource, $id);
+				print_r(json_encode($resp));
+				http_response_code(200);
+				break;
+			case "humedad_terrestre";
+				if($filtroFecha){
+					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
+					print_r(json_encode($resp));
+					http_response_code(200);
+				}
+				else{
+					$resp = GetAllData($resource);
+					print_r(json_encode($resp));
+					http_response_code(200);
+				}
+			break;
+			case "humedad_terrestre/$id";
+				$resp = GetDataById($resource, $id);
+				print_r(json_encode($resp));
+				http_response_code(200);
+				break;
+			case "fotoresistencia";
+				if($filtroFecha){
+					$resp = GetDataByDate($resource, $fechaInicio, $fechaFinal);
+					print_r(json_encode($resp));
+					http_response_code(200);
+				}
+				else{
+					$resp = GetAllData($resource);
+					print_r(json_encode($resp));
+					http_response_code(200);
+				}
+			break;
+			case "fotoresistencia/$id";
+				$resp = GetDataById($resource, $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
 			case "led";
-				$resp = GetAllLeds();
+				$resp = GetAllData($resource);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
 			case "led/$id";
-				$resp = GetLedById($id);
+				$resp = GetDataById($resource, $id);
 				print_r(json_encode($resp));
 				http_response_code(200);
 				break;
@@ -85,9 +136,9 @@ if(isset($_GET['url'])){
 		$conver = json_decode($postBody, true);
 
 		if(json_last_error() == 0){
-			switch ($var) {
-				case "temperature";
-					$estado = SetTemperature($conver);
+			switch ($resource) {
+				case "temperatura";
+					$estado = SetData($resource, $conver);
 					if($estado == true){
 						$resp = array("OK" => "OK");
 						print_r(json_encode($resp));
@@ -98,8 +149,44 @@ if(isset($_GET['url'])){
 					}
 					http_response_code(200);
 					break;
-				case "humidity";
-					$estado = SetHumidity($conver);
+				case "humedad";
+					$estado = SetData($resource, $conver);
+					if($estado == true){
+						$resp = array("OK" => "OK");
+						print_r(json_encode($resp));
+					}
+					else{
+						$resp = array("OK" => "Not OK");
+						print_r(json_encode($resp));
+					}
+					http_response_code(200);
+					break;
+				case "calor";
+					$estado = SetData($resource, $conver);
+					if($estado == true){
+						$resp = array("OK" => "OK");
+						print_r(json_encode($resp));
+					}
+					else{
+						$resp = array("OK" => "Not OK");
+						print_r(json_encode($resp));
+					}
+					http_response_code(200);
+					break;
+				case "humedad_terrestre";
+					$estado = SetData($resource, $conver);
+					if($estado == true){
+						$resp = array("OK" => "OK");
+						print_r(json_encode($resp));
+					}
+					else{
+						$resp = array("OK" => "Not OK");
+						print_r(json_encode($resp));
+					}
+					http_response_code(200);
+					break;
+				case "fotoresistencia";
+					$estado = SetData($resource, $conver);
 					if($estado == true){
 						$resp = array("OK" => "OK");
 						print_r(json_encode($resp));
@@ -111,7 +198,7 @@ if(isset($_GET['url'])){
 					http_response_code(200);
 					break;
 				case "led";
-					$estado = SetLed($conver);
+					$estado = SetData($resource, $conver);
 					if($estado == true){
 						$resp = array("OK" => "OK");
 						print_r(json_encode($resp));
@@ -156,39 +243,75 @@ else{?>
 			<div class="divbody">
 				<p>Sensor de Temperatura</p>
 				<code>
-					POST /temperature
+					<br>
+					GET /temperatura
+					<br>
+					GET /temperatura/$id
 				</code>
 				<code>
-					<br>
-					GET /temperature
-					<br>
-					GET /temperature/$id
+					POST /temperatura
 				</code>
 			</div>
 			<div class="divbody">
 				<p>Sensor de Humedad</p>
 				<code>
-					POST /humidity
+					<br>
+					GET /humedad
+					<br>
+					GET /humedad/$id
 				</code>
 				<code>
+					POST /humedad
+				</code>
+			</div>
+			<div class="divbody">
+				<p>Sensor de Sensación de Calor</p>
+				<code>
 					<br>
-					GET /humidity
+					GET /calor
 					<br>
-					GET /humidity/$id
+					GET /calor/$id
+				</code>
+				<code>
+					POST /calor
+				</code>
+			</div>
+			<div class="divbody">
+				<p>Sensor de Humedad Terrestre</p>
+				<code>
+					<br>
+					GET /humedad_terrestre
+					<br>
+					GET /humedad_terrestre/$id
+				</code>
+				<code>
+					POST /humedad_terrestre
+				</code>
+			</div>
+			<div class="divbody">
+				<p>Sensor de Fotoresistencia</p>
+				<code>
+					<br>
+					GET /fotoresistencia
+					<br>
+					GET /fotoresistencia/$id
+				</code>
+				<code>
+					POST /fotoresistencia
 				</code>
 			</div>
 			<div class="divbody">
 				<p>LED</p>
 				<code>
-					POST /led
-					<br>
-					POST /led/$id
-				</code>
-				<code>
 					<br>
 					GET /led
 					<br>
 					GET /led/$id
+				</code>
+				<code>
+					POST /led
+					<br>
+					POST /led/$id
 				</code>
 			</div>
 

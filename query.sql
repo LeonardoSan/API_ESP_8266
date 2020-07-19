@@ -1,6 +1,6 @@
-CREATE DATABASE db_domosoft;
+CREATE DATABASE domosoft;
 
-USE db_domosoft;
+USE domosoft;
 
 CREATE TABLE temperatura(
 
@@ -21,6 +21,60 @@ Ip varchar(255)
 )ENGINE=InnoDb;
 
 CREATE TABLE humedad(
+
+Id      int(255) primary key auto_increment not null,
+
+Valor 	decimal(10,2),
+
+Fecha	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+Lugar varchar(255),
+
+Id_Dispositivo varchar(255),
+
+Red	varchar(255),
+
+Ip varchar(255)
+
+)ENGINE=InnoDb;
+
+CREATE TABLE calor(
+
+Id      int(255) primary key auto_increment not null,
+
+Valor 	decimal(10,2),
+
+Fecha	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+Lugar varchar(255),
+
+Id_Dispositivo varchar(255),
+
+Red	varchar(255),
+
+Ip varchar(255)
+
+)ENGINE=InnoDb;
+
+CREATE TABLE humedad_terrestre(
+
+Id      int(255) primary key auto_increment not null,
+
+Valor 	decimal(10,2),
+
+Fecha	 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+Lugar varchar(255),
+
+Id_Dispositivo varchar(255),
+
+Red	varchar(255),
+
+Ip varchar(255)
+
+)ENGINE=InnoDb;
+
+CREATE TABLE fotoresistencia(
 
 Id      int(255) primary key auto_increment not null,
 

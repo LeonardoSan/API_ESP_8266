@@ -3,7 +3,7 @@
 // $server = "127.0.0.1";
 // $user = "root";
 // $pswd = "";
-// $database = "db_domosoft";
+// $database = "domosoft";
 // $port = "3306";
 
 $server = "localhost";
