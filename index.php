@@ -248,6 +248,7 @@ else{?>
 					<br>
 					GET /temperatura/$id
 				</code>
+				<br>
 				<code>
 					POST /temperatura
 				</code>
@@ -260,6 +261,7 @@ else{?>
 					<br>
 					GET /humedad/$id
 				</code>
+				<br>
 				<code>
 					POST /humedad
 				</code>
@@ -272,6 +274,7 @@ else{?>
 					<br>
 					GET /calor/$id
 				</code>
+				<br>
 				<code>
 					POST /calor
 				</code>
@@ -284,6 +287,7 @@ else{?>
 					<br>
 					GET /humedad_terrestre/$id
 				</code>
+				<br>
 				<code>
 					POST /humedad_terrestre
 				</code>
@@ -296,6 +300,7 @@ else{?>
 					<br>
 					GET /fotoresistencia/$id
 				</code>
+				<br>
 				<code>
 					POST /fotoresistencia
 				</code>
@@ -308,6 +313,7 @@ else{?>
 					<br>
 					GET /led/$id
 				</code>
+				<br>
 				<code>
 					POST /led
 					<br>
