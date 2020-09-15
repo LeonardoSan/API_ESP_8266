@@ -7,9 +7,9 @@
 // $port = "3306";
 
 $server = "localhost";
-$user = "u522727590_domosoft";
+$user = "u762870467_domosoft";
 $pswd = "/cNh#z_yj4w=unza";
-$database = "u522727590_domosoft";
+$database = "u762870467_domosoft";
 $port = "3306";
 
 
